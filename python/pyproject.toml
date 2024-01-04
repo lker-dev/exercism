@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "exercism-walker"
+version = "v0.1.0"
+description = "Keeping track of exercism solutions and track"
+authors = ["Jonathan Walker <w@lker.dev>"]
+readme = "README.md"
+packages = [{include = "bob"}]
+
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
