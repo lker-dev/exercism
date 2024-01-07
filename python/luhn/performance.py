@@ -2,8 +2,10 @@ import timeit
 
 loops = 1_000_000
 
-val = timeit.timeit("""Luhn("9999999999 9999999999 9999999999 9999999999").valid()""",
-                    """
+val = (
+    timeit.timeit(
+        """Luhn("9999999999 9999999999 9999999999 9999999999").valid()""",
+        """
 class Luhn:
 
     def __init__(self, card_num):
@@ -31,12 +33,18 @@ class Luhn:
                 return False
         return pos > 1 and not total % 10
 
-""", number=loops) / loops
+""",
+        number=loops,
+    )
+    / loops
+)
 
 print(f"reversed for:                 {val}")
 
-val = timeit.timeit("""Luhn("9999999999 9999999999 9999999999 9999999999").valid()""",
-                    """
+val = (
+    timeit.timeit(
+        """Luhn("9999999999 9999999999 9999999999 9999999999").valid()""",
+        """
 class Luhn:
 
     def __init__(self, card_num):
@@ -63,12 +71,18 @@ class Luhn:
             pos += 1
         return pos > 1 and not total % 10
 
-""", number=loops) / loops
+""",
+        number=loops,
+    )
+    / loops
+)
 
 print(f"replace reverse enumerate:    {val}")
 
-val = timeit.timeit("""Luhn("9999999999 9999999999 9999999999 9999999999").valid()""",
-                    """
+val = (
+    timeit.timeit(
+        """Luhn("9999999999 9999999999 9999999999 9999999999").valid()""",
+        """
 class Luhn:
     def __init__(self, card_num):
         self.isValid = Luhn.luhny_bin(0, 0, list(card_num[::-1]))
@@ -95,14 +109,19 @@ class Luhn:
                 return Luhn.luhny_bin(pos, sum, tail)
             return False
 
-""", number=loops) / loops
+""",
+        number=loops,
+    )
+    / loops
+)
 
 print(f"recursion:                    {val}")
 
 
-
-val = timeit.timeit("""Luhn("9999999999 9999999999 9999999999 9999999999").valid()""",
-"""
+val = (
+    timeit.timeit(
+        """Luhn("9999999999 9999999999 9999999999 9999999999").valid()""",
+        """
 import re
 class Luhn:
     def __init__(self, card_num):
@@ -122,7 +141,10 @@ class Luhn:
 
         card_num = ''.join(number if (len(card_num) - index) % 2 else str(int(number) * 2 if int(number) < 5 else (int(number)*2 - 9)) for index, number in enumerate(list(card_num)))
         return sum(int(number) for number in card_num) % 10 == 0
- """, number=loops) / loops
+ """,
+        number=loops,
+    )
+    / loops
+)
 
 print(f"my regex solution:                    {val}")
-
