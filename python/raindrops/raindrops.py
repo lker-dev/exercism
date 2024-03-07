@@ -10,16 +10,16 @@ If a given number:
 - **is not** divisible by 3, 5, or 7, the result should be the number as a string.
     """
     rain = ''
-    if number % 3 == 0:
-        rain += "Pling"
-    if number % 5 == 0:
-        rain += "Plang"
-    if number % 7 == 0:
-        rain += "Plong"
-        return rain
-    if rain == '':
-        return f"{number}"
-    return rain 
+    sounds = {
+            3: "Pling",
+            5: "Plang",
+            7: "Plong"
+    }
+    
+    for sound in sounds.keys():
+        if number % sound == 0:
+            rain += sounds[sound]
 
+    return rain if rain else str(number)
 
 
